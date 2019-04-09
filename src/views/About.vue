@@ -1,5 +1,7 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="tile double bg-green">
+    <div class="tile-content">
+      <h2>This is an about page</h2>
+    </div>
   </div>
 </template>
