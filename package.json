@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "axios": "^0.18.0",
     "jquery": "^3.3.1",
     "metro4": "^4.2.39",
     "vue": "^2.6.10",

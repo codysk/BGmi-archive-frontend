@@ -12,5 +12,14 @@ module.exports = {
     index: {
       entry: 'src/main.js'
     }
+  },
+  devServer: {
+    proxy: {
+      '/': {
+        target:"http://bgmi.two.moe/",
+        changeOrigin:true,
+        ws: false,
+      }
+    }
   }
 }

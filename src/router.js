@@ -8,12 +8,12 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '*',
       name: 'fileBrowser',
       component: FileBrowser
     },
     {
-      path: '/about',
+      path: '/.player/*',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
