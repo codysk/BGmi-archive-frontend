@@ -18,6 +18,7 @@
 
 <script>
 import TileGroup from './components/TileGroup.vue'
+import utils from '../utils.js'
 import $ from 'jquery'
 import axios from 'axios'
 var fileArr = []
@@ -47,7 +48,7 @@ export default {
       axios
         .get(this.$route.path)
         .then(resp => {
-          var file_list = this.getList(resp.data)
+          var file_list = utils.groupList(utils.getList(resp.data))
           //console.log(file_list)
           var group_index = 0
           for (var group of file_list) {
@@ -64,40 +65,6 @@ export default {
           
         })
       
-    },
-    getList(html){
-      var bodylines = html.split('\n')
-      var file_list = [[]]
-      var file_list_group_index = 0
-      var file_count = 0
-      for (var i in bodylines) {
-      	var m = false
-        if (m = /\s*<a href="(.+?)">(.+?)<\/a>\s+(\S+)\s+(\S+)\s+(\S+)\s*/.exec(bodylines[i])) {
-          var filename = m[1]
-          var datetime = m[3] + ' ' + m[4]
-          var size = m[5]
-          var type = ''
-          if (/\/$/.test(filename)) {
-            type = 'file-directory'
-          } else if (/\.(zip|7z|bz2|gz|tar|tgz|tbz2|xz|cab)$/.test(filename)) {
-            type = 'file-zip'
-          } else if (/\.(jpg|png|bmp|gif|ico|webp)$/.test(filename)) {
-            type = 'file-image'
-          } else if (/\.(flv|mp4|mkv|avi|mkv|webm)$/.test(filename)) {
-            type = 'file-video'
-          } else {
-            type = 'file'
-          }
-          var displayname = decodeURIComponent(filename.replace(/\/$/, ''))
-          file_list[file_list_group_index].push({name: displayname, filename: filename, datetime: datetime, size: size, type: type})
-          file_count += 1
-          if (file_count % 15 == 0) {
-          	file_list.push([])
-          	file_list_group_index += 1
-          }
-        }
-      }
-      return file_list
     },
     reflow(){
       $.StartScreen = function(){
@@ -173,5 +140,8 @@ export default {
 	opacity: 1;
     transform: scale(1);
     transition: all 0.3s ease 0s;
+}
+.tiles-group::before{
+	text-overflow: ellipsis;
 }
 </style>
