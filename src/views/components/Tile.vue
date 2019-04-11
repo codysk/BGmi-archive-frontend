@@ -89,6 +89,7 @@ export default {
   },
   methods: {
     fetchData(){
+      if (/^\d+$/.test(this.file.name)) { return } // 纯数字的文件夹不爬图
       axios
         .get(this.$route.path + this.file.filename)
         .then(resp => {
