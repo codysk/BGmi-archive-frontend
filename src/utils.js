@@ -24,7 +24,17 @@ export default {
         file_list.push({name: displayname, filename: filename, datetime: datetime, size: size, type: type})
       }
     }
+    file_list.sort(this.cmp)
     return file_list
+  },
+  cmp(a, b) {
+    var _a = a.name
+    var _b = b.name
+    if (_a == _b) return 0;
+    if (/^\d+$/.test(_a)) _a = String.fromCharCode(_a)
+    if (/^\d+$/.test(_b)) _b = String.fromCharCode(_b)
+    if (_a > _b) return 1;
+    else return -1;
   },
   groupList(file_list){
     var file_count = 0

@@ -34,7 +34,7 @@
   color: inherit;
   height: 1.5em;
   line-height: 1.5em;
-
+  overflow: hidden;
 }
 </style>
 
