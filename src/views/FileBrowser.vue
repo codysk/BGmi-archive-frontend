@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted(){
-    this.fetchData()
+    this.fetchData(this.$route)
   },
   create(){
   
@@ -42,11 +42,12 @@ export default {
     '$route': 'fetchData'
   },
   methods: {
-    fetchData () {
+    fetchData (url) {
+      url = url.path
       fileArr.length = 0;
-      console.log(this.$route)
+      console.log(url)
 
-      var file_list = this.$wsCache.get('url2filelist:' + this.$route.path);
+      var file_list = this.$wsCache.get('url2filelist:' + url);
       if (file_list) {
         this.handleFileList(file_list)
         console.log('from cache')
@@ -54,10 +55,10 @@ export default {
       }
       
       axios
-        .get(this.$route.path)
+        .get(url)
         .then(resp => {
           var file_list = utils.getList(resp.data)
-          this.$wsCache.set('url2filelist:' + this.$route.path, file_list, {exp: 3600})
+          this.$wsCache.set('url2filelist:' + url, file_list, {exp: 3600})
           this.handleFileList(file_list)
         })
       

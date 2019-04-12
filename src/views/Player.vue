@@ -3,9 +3,11 @@
     class="container-fluid h-100 player-screen"
     style="overflow: auto;"
   >
-    <h1 class="start-screen-title">Bangumi.mp4</h1>
+    <h1 class="start-screen-title">Player</h1>
+    <div class="filepath">{{ path }}</div>
     <div class="player-container">
-      <div id="dplayer"/>
+      
+      <div id="player"/>
     </div>
   </div>
 </template>
@@ -18,24 +20,52 @@
   background-color: white;
   width: 70%;
   min-height: 30%;
-  margin: 60px auto 0 auto;
+  margin: 0 auto 0 auto;
+}
+.start-screen-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.filepath {
+  width: 70%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0 auto 0 auto;
+  color: inherit;
+  height: 1.5em;
+  line-height: 1.5em;
+
 }
 </style>
 
 <script>
-import 'dplayer/dist/DPlayer.min.css';
 import DPlayer from 'dplayer';
+import 'dplayer/dist/DPlayer.min.css';
 
 export default {
   name: 'Player',
+  data: function() {
+    return {
+      filename: "*****",
+      path: "********"
+    }
+  },
   mounted(){
+
+    var path = this.$route.path
+    path = path.slice(8)
+    this.path = path
+    console.log(path)
+    var filename = path.split('/').pop();
+    filename = decodeURIComponent(filename.replace(/\/$/, ''))
+    this.filename = filename
     this.$nextTick(() => {
       const dp = new DPlayer({
-        container: document.getElementById('dplayer'),
+        container: document.getElementById('player'),
         screenshot: true,
         autoplay: false,
         video: {
-            url: '#',
+            url: path,
         }
       });
     })

@@ -85,13 +85,13 @@ export default {
     
   },
   mounted(){
-  	if(this.file.type == 'file-directory') this.fetchData()
+  	if(this.file.type == 'file-directory') this.fetchData(this.$route.path + this.file.filename)
   },
   methods: {
-    fetchData(){
+    fetchData(url){
       if (/^\d+$/.test(this.file.name)) { return } // 纯数字的文件夹不爬图
 
-      var file_list = this.$wsCache.get('url2filelist:' + this.$route.path + this.file.filename);
+      var file_list = this.$wsCache.get('url2filelist:' + url);
       if (file_list) {
         this.handleFileList(file_list)
         console.log('from cache')
@@ -102,7 +102,7 @@ export default {
         .get(this.$route.path + this.file.filename)
         .then(resp => {
           var file_list = utils.getList(resp.data)
-          this.$wsCache.set('url2filelist:' + this.$route.path + this.file.filename, file_list, {exp: 3600})
+          this.$wsCache.set('url2filelist:' + url, file_list, {exp: 3600})
           // console.log(file_list)
           this.handleFileList(file_list)
         })
