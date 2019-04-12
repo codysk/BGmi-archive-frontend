@@ -90,17 +90,29 @@ export default {
   methods: {
     fetchData(){
       if (/^\d+$/.test(this.file.name)) { return } // 纯数字的文件夹不爬图
+
+      var file_list = this.$wsCache.get('url2filelist:' + this.$route.path + this.file.filename);
+      if (file_list) {
+        this.handleFileList(file_list)
+        console.log('from cache')
+        return
+      }
+
       axios
         .get(this.$route.path + this.file.filename)
         .then(resp => {
           var file_list = utils.getList(resp.data)
+          this.$wsCache.set('url2filelist:' + this.$route.path + this.file.filename, file_list, {exp: 3600})
           // console.log(file_list)
-          for (var item of file_list){
-          	if (/\.(jpg|png|bmp|gif|ico|webp)$/.test(item.filename)) {
-          		this.imgUrl = this.$route.path + this.file.filename + item.filename
-          	}
-          }
+          this.handleFileList(file_list)
         })
+    },
+    handleFileList(file_list){
+      for (var item of file_list){
+        if (/\.(jpg|png|bmp|gif|ico|webp)$/.test(item.filename)) {
+          this.imgUrl = this.$route.path + this.file.filename + item.filename
+        }
+      }
     },
     imgLoaded(){
     	this.show = true

@@ -45,26 +45,37 @@ export default {
     fetchData () {
       fileArr.length = 0;
       console.log(this.$route)
+
+      var file_list = this.$wsCache.get('url2filelist:' + this.$route.path);
+      if (file_list) {
+        this.handleFileList(file_list)
+        console.log('from cache')
+        return
+      }
+      
       axios
         .get(this.$route.path)
         .then(resp => {
-          var file_list = utils.groupList(utils.getList(resp.data))
-          //console.log(file_list)
-          var group_index = 0
-          for (var group of file_list) {
-          	fileArr.push([])
-          	for (var file of group){
-	            fileArr[group_index].push(file)
-          	}
-          	group_index += 1
-          }
-          console.log(fileArr)
-          this.$nextTick(function(){
-            this.reflow()
-          })
-          
+          var file_list = utils.getList(resp.data)
+          this.$wsCache.set('url2filelist:' + this.$route.path, file_list, {exp: 3600})
+          this.handleFileList(file_list)
         })
       
+    },
+    handleFileList(file_list){
+      var file_list = utils.groupList(file_list)
+      var group_index = 0
+      for (var group of file_list) {
+        fileArr.push([])
+        for (var file of group){
+          fileArr[group_index].push(file)
+        }
+        group_index += 1
+      }
+      console.log(fileArr)
+      this.$nextTick(function(){
+        this.reflow()
+      })
     },
     reflow(){
       $.StartScreen = function(){
