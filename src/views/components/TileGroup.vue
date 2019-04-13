@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="tiles-grid tiles-group size-5 fg-white" 
+    :class="classStr" 
     :data-group-title="decodeURIComponent($route.path.replace(/\/$/, ''))"
     v-if="index == 0"
   >
@@ -11,7 +11,7 @@
     />
   </div>
   <div 
-    class="tiles-grid tiles-group size-5 fg-white" 
+    :class="classStr" 
     v-else
   >
     <Tile
@@ -38,7 +38,20 @@ export default {
       type: Number,
       default: 0,
       required: false
+    },
+    groupSize:{
+      type: Number,
+      default: 5,
+      required: false
     }
+  },
+  data(){
+    return {
+      classStr: ""
+    }
+  },
+  created(){
+    this.classStr = "tiles-grid tiles-group fg-white size-" + this.groupSize
   },
   components: {
     Tile

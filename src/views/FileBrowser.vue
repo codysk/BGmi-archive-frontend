@@ -10,6 +10,7 @@
         :file-arr="group"
         :key="index"
         :index="index"
+        :group-size="groupSize"
       />
 
     </div>
@@ -29,14 +30,19 @@ export default {
   },
   data: function() {
     return { 
-      fileArr: fileArr
+      fileArr: fileArr,
+      groupSize: 5
     }
   },
   mounted(){
     this.fetchData(this.$route)
   },
-  create(){
-  
+  created(){
+  	  var availWidth = document.body.clientWidth
+  	  if (availWidth <= 640) {
+      this.groupSize = Math.floor((availWidth - 10) / 160)
+      console.log('update group_size: ' + this.groupSize)
+    }
   },
   watch:{
     '$route': 'fetchData'
@@ -79,6 +85,7 @@ export default {
       })
     },
     reflow(){
+      var $this = this
       $.StartScreen = function(){
       var plugin = this;
       var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -97,7 +104,11 @@ export default {
         var tileAreaWidth = 80;
         $.each(groups, function(i, t){
           if (width <= Metro.media_sizes.LD) {
-            tileAreaWidth = width;
+          	// console.log($this)
+            tileAreaWidth = (150 * $this.groupSize) + ($this.groupSize * 10);
+            $(".container-fluid").removeClass('h-100')
+            $(".container-fluid").css({height: 'auto'})
+            console.log("tileAreaWidth: " + tileAreaWidth)
           } else {
             tileAreaWidth += $(t).outerWidth() + 80;
           }
@@ -149,11 +160,17 @@ export default {
 
 <style scoped>
 .tile-large, .tile-medium, .tile-wide, .tile-small {
-	opacity: 1;
+  opacity: 1;
     transform: scale(1);
     transition: all 0.3s ease 0s;
 }
 .tiles-group::before{
-	text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+@media (max-width: 768px) {
+  .tiles-area {
+    margin: 0 auto;
+    left: 5px;
+  }
 }
 </style>

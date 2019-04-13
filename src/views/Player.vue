@@ -19,12 +19,12 @@
 .player-container {
   background-color: white;
   width: 70%;
-  min-height: 30%;
   margin: 0 auto 120px auto;
 }
 .start-screen-title {
   white-space: nowrap;
   text-overflow: ellipsis;
+  display: block;
 }
 .filepath {
   width: 70%;
