@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+- 11.13.0
+cache:
+- npm
+- node_modules
+- "$HOME/.npm"
+before_script:
+- npm i
+script:
+- npm run build
+- echo '<!--' >> dist/index.html
+- cp -r dist .core
+- tar czvf bgmi-archive-frontend.tgz .core/
+deploy:
+  provider: releases
+  api_key:
+    secure: UHOE7EW5V2hcUjIxS3vKfdIGP106W+2D4g742YiCb1JPIbZP6nTZVObPwlZ/9LzEcQ44O/4uEU1N+fYe96l5BnQSjUTXwPtYww44GxGFalB7F4wLkOQICIzSN30QQC+4saBkuyC7yAsk1sOOjT5pOogsUuFi+4Mpj6e3nuY9SlYDv6ijhS/nmVHA4aL066rxihCisb9hzHKTp2QIFOfZbBJ7EN8M73WfHr7jOzNzc5qBTfpQBToWv9x2wwmfDDJYtOvID+OWsjnEuW+KXfaGUx9NYB7H1z67AfoXCe0zotr8i2graZ5v9meivI/aIkJ8Cw8Qk77VuoMSLEt26CzcrbUhwnauXq9LLSqiLw+TqKFEg4yVWxegi3xnGv9dtn6j8TQem4WEPRru8PndCf2D2nwOLvIoaBYAwTb2CUgUzZcVTOa7ZK5iO2VXoMAsYttAX8hmjTDMRi/AJNYEMCazWpA9Ta0GgHEirRGtFEMhbdZtKBtdnaztvKaJZaUM0ANKrB0A0cONeOeadQQhblvQw4ZEksm+e7D2ROcXLhW/qKPWEQKRvNk+kR4r/A3vIdfvGNbKVGQiXIzcEqJkDfgh3ihsvsWgZ5PIie2KoENBS9IG519pE0SW7xDJzkjw3Gnt6HABPGlZIU8S+y58sO5YFeydqtezOBuCxOgydTfn9z8=
+  file: bgmi-archive-frontend.tgz
+  draft: true
+  on:
+    tags: true
+    repo: codysk/BGmi-archive-frontend
