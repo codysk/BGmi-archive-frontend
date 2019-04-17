@@ -41,7 +41,7 @@ location /bangumi {
 4. Enjoy it.
 
 
-[imageFileBrowserMain]:http://wx2.sinaimg.cn/mw690/712bbf3ely1g264cnzjpoj21bg0lob29.jpg
-[imageFileBrowserBangumi]:http://wx2.sinaimg.cn/mw690/712bbf3ely1g264cic2wuj21b70m0tat.jpg
-[imagePlayer]:http://wx3.sinaimg.cn/mw690/712bbf3ely1g264crq0ezj21az0ns7sv.jpg
-[autoindex]:http://wx2.sinaimg.cn/mw690/712bbf3ely1g264cwkf2aj20tb0dt74s.jpg
+[imageFileBrowserMain]:http://wx2.sinaimg.cn/large/712bbf3ely1g264cnzjpoj21bg0lob29.jpg
+[imageFileBrowserBangumi]:http://wx2.sinaimg.cn/large/712bbf3ely1g264cic2wuj21b70m0tat.jpg
+[imagePlayer]:http://wx3.sinaimg.cn/large/712bbf3ely1g264crq0ezj21az0ns7sv.jpg
+[autoindex]:http://wx2.sinaimg.cn/large/712bbf3ely1g264cwkf2aj20tb0dt74s.jpg
