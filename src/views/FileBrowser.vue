@@ -166,6 +166,9 @@ export default {
 }
 .tiles-group::before{
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
 }
 @media (max-width: 768px) {
   .tiles-area {

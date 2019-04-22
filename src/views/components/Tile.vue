@@ -2,6 +2,7 @@
   <router-link
     v-if="file.type == 'file-directory'"
     class="tile-medium"
+    :title="file.name"
     :to="$route.path + file.filename"
   >
     <img
@@ -19,6 +20,7 @@
   <router-link
     v-else-if="file.type == 'file-video'"
     class="tile-medium"
+    :title="file.name"
     :to="'/.player' + $route.path + file.filename"
   >
     <img
@@ -36,6 +38,7 @@
   <a 
     v-else-if="file.type == 'file-zip' || file.type == 'file-image' || file.type == 'file'"
     class="tile-medium"
+    :title="file.name"
     :href="$route.path + file.filename"
   >
     <img
