@@ -6,10 +6,10 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "axios": "^0.18.0",
     "dplayer": "^1.25.0",
-    "jquery": "^3.3.1",
-    "metro4": "^4.2.39",
+    "jquery": "^3.4.1",
+    "metro4": "^4.2.42",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.1",
+    "vue-router": "^3.0.6",
     "web-storage-cache": "^1.0.3"
   },
   "scripts": {
@@ -17,9 +17,9 @@
     "build": "vue-cli-service build"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.0",
-    "@vue/cli-plugin-eslint": "^3.5.0",
-    "@vue/cli-service": "^3.5.3",
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
     "vue-template-compiler": "^2.0.0"
   }
 }
