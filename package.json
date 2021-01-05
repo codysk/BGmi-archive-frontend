@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "dplayer": "^1.25.0",
     "jquery": "^3.4.1",
     "metro4": "^4.2.45",
