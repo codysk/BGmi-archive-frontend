@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^5.0.8",
-    "@vue/cli-plugin-eslint": "^3.9.2",
+    "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
     "vue-template-compiler": "^2.0.0"
   }
